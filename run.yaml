@@ -1,20 +1,16 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
-
 metadata:
-  name: taxcalculator-pipeline-run
-
+  generateName: cd-pipeline-run-
 spec:
   pipelineRef:
-    name: taxcalculator-pipeline
-
+    name: cd-pipeline
   params:
     - name: repo-url
-      value: https://github.com/TalalRAO23/tax-calculator
-
-    - name: image-url
-      value: us.icr.io/talalafzaal45/tax-calculator:1.0
-
+      value: https://github.com/Abdulhaseebkhan-Dev/juphc-tc_pipeline.git
+    - name: branch
+      value: main
   workspaces:
-    - name: pipeline-ws
-      emptyDir: {}
+    - name: pipeline-workspace
+      persistentVolumeClaim:
+        claimName: pipelinerun-pvc
